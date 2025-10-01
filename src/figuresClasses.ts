@@ -23,9 +23,9 @@ export class Triangle implements Figure {
     const sumOfOtherSides: number = a + b + c - maxSide;
 
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('your error message');
+      throw new Error(`Sides must be > 0; got a=${a}, b=${b}, c=${c}`);
     } else if (maxSide >= sumOfOtherSides) {
-      throw new Error('your error message');
+      throw new Error(`sides ${a}, ${b} and ${c} can't form a triangle`);
     }
 
     this.color = color;
@@ -38,7 +38,7 @@ export class Triangle implements Figure {
     const s = (this.a + this.b + this.c) / 2;
     const area = Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c));
 
-    return Math.round(area * 100) / 100;
+    return Math.floor(area * 100) / 100;
   }
 }
 
@@ -51,7 +51,7 @@ export class Circle implements Figure {
 
   constructor(color: Color, radius: number) {
     if (radius <= 0) {
-      throw new Error('your error message');
+      throw new Error(`Radius must be > 0; got ${radius}`);
     }
     this.color = color;
     this.radius = radius;
@@ -75,7 +75,9 @@ export class Rectangle implements Figure {
 
   constructor(color: Color, width: number, height: number) {
     if (width <= 0 || height <= 0) {
-      throw new Error('your error message');
+      throw new Error(`
+        Width and height must be > 0; got width=${width}, height=${height}
+      `);
     }
     this.color = color;
     this.width = width;
@@ -85,7 +87,7 @@ export class Rectangle implements Figure {
   getArea(): number {
     const area = this.width * this.height;
 
-    return Math.round(area * 100) / 100;
+    return Math.floor(area * 100) / 100;
   }
 }
 
